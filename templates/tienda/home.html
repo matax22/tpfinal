@@ -1,0 +1,62 @@
+{% extends "./base.html" %}
+{% load static %}
+
+{% block title %}JAGUARETEBOOKS{% endblock %}
+
+{%block content%}
+<main>
+  <section class="py-5 text-center container">
+    <div class="row py-lg-3">
+      <div class="col-lg-6 col-md-8 mx-auto">
+        <h1 class="h1 fw-bold">Bienvenidos a Jaguarete KAA S.A</h1>
+        <p class="lead text-muted">Tu mejor opcion en la compra de libros </p>
+        <p>
+        {% if user.is_authenticated %}
+                  <a href="{% url "account:dashboard" %}" class="btn btn-primary my-2">Crear cuenta</a>
+
+          
+                    {% else %}
+
+      
+        
+          <a href="{% url "account:register" %}" class="btn btn-primary my-2">Crear cuenta</a>
+        </p>
+                            {% endif %}
+
+      </div>
+    </div>
+  </section>
+
+
+ <div class="album py-5 bg-light">
+    <div class="container">
+
+      <div class="pb-3 h5">Nuestros libros</div>
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-5 g-3">
+
+        {% for productos in productos %}
+
+        <div class="col">
+          <div class="card shadow-sm">
+            <img class="img-fluid" alt="Imagen Responsiva" src="{{ productos.imagen.url }}">
+            <div class="card-body">
+              <p class="card-text">
+                <a class="text-dark text-decoration-none" href="{{ productos.get_absolute_url }}">{{ productos.titulo }}</a>
+              </p>
+              <div class="d-flex justify-content-between align-items-center">
+                <small class="text-muted">Recien llegados</small>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {% endfor %}
+
+      </div>
+    </div>
+  </div>
+
+
+</main>
+
+{% endblock %}
